@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="col-md-6 offset-md-3">
+<h1>Customer File</h1>
+<br>
+{{ cus_file.first_name }}
+         {{ cus_file.last_name }}<br>
+          {{ cus_file.email }}<br>
+           {{ cus_file.address }}<br>
+         {{ cus_file.state }}<br>
+         {{ cus_file.pincode }}
+        </div>
+{% endblock %}

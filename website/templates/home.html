@@ -2,7 +2,54 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>Hellow bro</h1>
+{% if messages %}
+	{% for msg in messages %}
+  <br/> 
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{ msg }}
+</div>
+	{% endfor %}
+	{% endif %}
+  <br>
+  <div class="col-md-10 offset-md-1">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Sl.no</th>
+        <th scope="col">First_name</th>
+        <th scope="col">Last_name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">State</th>
+        <th scope="col">Pin Code</th>
+   </tr>
+    </thead>
+    <tbody>
+      {% if files %}
+{% for file in files %}
+      <tr>
+        <th scope="row"><a href="{% url 'file' file.id %}"> {{file.id }}</a></th>
+        <td>{{ file.first_name }}</td>
+        <td> {{ file.last_name }}</td>
+  
+          <td>{{ file.email }}</td>
+          <td> {{ file.address }}</td> 
+        <td> {{ file.state }}</td> 
+        <td> {{ file.pincode }}</td> 
+      </tr>
+      {% endfor %}
+{% endif %}
+    </tbody>
+  </table></div>
+<!--
+<script>
+  setTimeout(() => {
+    alert("You have been inactive for 10 minutes. Logging out...");
+    window.location.href = "{% url 'logout' %}";
+  }, 1800000); 
+</script>
+-->
+
 {% else %}
 <br/>
 <div class="col-md-6 offset-md-3">
