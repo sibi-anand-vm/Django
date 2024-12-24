@@ -4,11 +4,29 @@
 <div class="col-md-6 offset-md-3">
 <h1>Customer File</h1>
 <br>
-{{ cus_file.first_name }}
-         {{ cus_file.last_name }}<br>
-          {{ cus_file.email }}<br>
-           {{ cus_file.address }}<br>
-         {{ cus_file.state }}<br>
-         {{ cus_file.pincode }}
+<div class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card border-dark">
+          <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">User Details</h5>
+          </div>
+          <div class="card-body">
+            <p><strong>First Name:</strong> {{ cus_file.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ cus_file.last_name }}</p>
+            <p><strong>Email:</strong> {{ cus_file.email }}</p>
+            <p><strong>Address:</strong> {{ cus_file.address }}</p>
+            <p><strong>State:</strong> {{ cus_file.state }}</p>
+            <p><strong>Pincode:</strong> {{ cus_file.pincode }}</p>
+          </div>
+          <div class="card-footer text-muted text-center">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-primary" href="{% url 'home' %}">Back</a>
+  <a class="btn btn-danger" href="{% url 'delfile' cus_file.id %}">Delete</a>
+  <a class="btn btn-secondary" href="{% url 'updatefile' cus_file.id %}">Update</a>
         </div>
 {% endblock %}

@@ -2,7 +2,7 @@ import time
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from . forms import SignUpForm
+from . forms import SignUpForm,Addfile
 from .models import File
 def home(request):
 	files=File.objects.all()
@@ -42,6 +42,39 @@ def customer_file(request,pk):
 	if request.user.is_authenticated:
 		cus_file=File.objects.get(id=pk)
 		return render(request,'file.html',{'cus_file':cus_file})
+	else:
+		messages.success(request,"You need to logged in")
+		return redirect('home')	
+def del_file(request,pk):
+	if request.user.is_authenticated:
+		tar_file=File.objects.get(id=pk)
+		tar_file.delete()
+		messages.success(request,"You have successfully deleted file")
+		return redirect('home')
+	else:
+		messages.success(request,"You need to logged in")
+		return redirect('home')	
+def add_file(request):
+	addform=Addfile(request.POST or None)
+	if request.user.is_authenticated:
+		if request.method=="POST":
+			if addform.is_valid():
+				addform.save()
+				messages.success(request,"File added successfully")
+				return redirect('home')	
+		return render(request,'addfile.html',{'form':addform})		
+	else:
+		messages.success(request,"You need to logged in")
+		return redirect('home')
+def update_file(request,pk):
+	if request.user.is_authenticated:
+		curr_file=File.objects.get(id=pk)
+		updateform=Addfile(request.POST or None,instance=curr_file)
+		if updateform.is_valid():
+			updateform.save()
+			messages.success(request,"File updated successfully")
+			return redirect('home')	
+		return render(request,'updatefile.html',{'form':updateform})	
 	else:
 		messages.success(request,"You need to logged in")
 		return redirect('home')	

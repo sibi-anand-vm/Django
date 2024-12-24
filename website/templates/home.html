@@ -5,8 +5,11 @@
 {% if messages %}
 	{% for msg in messages %}
   <br/> 
+  <div class="col-md-6 offset-md-3">
 	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    
   {{ msg }}
+  </div>
 </div>
 	{% endfor %}
 	{% endif %}
@@ -41,14 +44,13 @@
 {% endif %}
     </tbody>
   </table></div>
-<!--
 <script>
   setTimeout(() => {
     alert("You have been inactive for 10 minutes. Logging out...");
     window.location.href = "{% url 'logout' %}";
   }, 1800000); 
 </script>
--->
+
 
 {% else %}
 <br/>
@@ -56,9 +58,8 @@
 	<br/>
 	{% if messages %}
 	{% for msg in messages %}
-	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  {{ msg }}
-</div>
+    <div class="col-md-6 offset-md-3">
+  {{ msg }}</div>
 	{% endfor %}
 	{% endif %}
 	<form method="POST" action="{% url 'home' %}">
